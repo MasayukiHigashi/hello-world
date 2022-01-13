@@ -47,7 +47,8 @@ with open(log_path , 'w', newline="") as f:
     writer.writerow(log_header)
 
 
-for i in range(recording_time*gnss_hertz):
+# for i in range(recording_time*gnss_hertz):
+while(true):
     #tmp_time = time.time()
     #recv_data = comport.read(100).decode()
     recv_data = comport.readline().decode()
