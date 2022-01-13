@@ -8,23 +8,13 @@ import os
 from serial.tools import list_ports
 import traceback
 
-# if you use ubuntu ,set ubuntu flag True 
-ubuntu_flag = True
-ubuntu_flag = False
 #gnss_hertz = 10
 #recording_time = 60
 
-def preprocess(ubuntu_flag=True,baudrate = 230400):
-    # for ubuntu
-    if ubuntu_flag:
-        import subprocess
-        device_name = '/dev/ttyUSB0'
-        # permission change 
-        subprocess.run('sudo chmod o+wr ' + device_name,shell=True)
-        comport = serial.Serial(device_name,baudrate=baudrate,parity=serial.PARITY_NONE)
-    # port num search　for windows
-    # set device keyword
-    else :
+def preprocess(windows_flag=False,baudrate = 230400,device_name = '/dev/ttyUSB0',device_name_keyword = "MOXA"):
+    if windows_flag:
+        # port num search　for windows
+        # set device keyword
         def comport_search(device_name_keyword = "MOXA"):
             # return port num
             ports = list_ports.comports()
@@ -35,7 +25,13 @@ def preprocess(ubuntu_flag=True,baudrate = 230400):
             except:
                 print("計測器が接続されていません")
                 exit()
-        comport = serial.Serial(comport_search(),baudrate=baudrate,parity=serial.PARITY_NONE)
+        comport = serial.Serial(comport_search(device_name_keyword),baudrate=baudrate,parity=serial.PARITY_NONE)
+    # for ubuntu
+    else :
+        import subprocess
+        # permission change 
+        subprocess.run('sudo chmod o+wr ' + device_name,shell=True)
+        comport = serial.Serial(device_name,baudrate=baudrate,parity=serial.PARITY_NONE)
     return comport
 
 def create_log_file(log_save_dir = 'gnss_log'):
@@ -88,6 +84,11 @@ def log_gnss(comport,log_path,print_flag = True):
         sys.exit()
 
 if __name__ == "__main__":
-    comport = preprocess(ubuntu_flag)
+    if os.name == 'nt':
+        windows_flag = True
+    else:
+        windows_flag = False
+    comport = preprocess(windows_flag)
     log_path = create_log_file()
+    #log_gnss(comport,log_path,print_flag = False)
     log_gnss(comport,log_path)
