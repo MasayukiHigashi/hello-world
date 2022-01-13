@@ -13,7 +13,7 @@ import traceback
 
 def preprocess(windows_flag=False,baudrate = 230400,device_name = '/dev/ttyUSB0',device_name_keyword = "MOXA"):
     if windows_flag:
-        # port num search　for windows
+        # port num search for windows
         # set device keyword
         def comport_search(device_name_keyword = "MOXA"):
             # return port num
