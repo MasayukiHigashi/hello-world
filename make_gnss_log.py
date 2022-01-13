@@ -19,9 +19,9 @@ def comport_search(device_name_keyword = "MOXA"):
         print("計測器が接続されていません")
         exit()
 
-#
-#comport = serial.Serial("COM1",baudrate=230400,parity=serial.PARITY_NONE)
-comport = serial.Serial(comport_search(),baudrate=230400,parity=serial.PARITY_NONE)
+
+comport = serial.Serial("/dev/ttyUSB0",baudrate=230400,parity=serial.PARITY_NONE)
+#comport = serial.Serial(comport_search(),baudrate=230400,parity=serial.PARITY_NONE)
 
 all_time = 0
 gnss_hertz = 10
