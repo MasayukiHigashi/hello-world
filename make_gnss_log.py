@@ -90,5 +90,5 @@ if __name__ == "__main__":
         windows_flag = False
     comport = preprocess(windows_flag)
     log_path = create_log_file()
-    #log_gnss(comport,log_path,print_flag = False)
-    log_gnss(comport,log_path)
+    log_gnss(comport,log_path,print_flag = False)
+    # log_gnss(comport,log_path)
