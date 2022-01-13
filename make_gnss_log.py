@@ -5,9 +5,16 @@ import csv
 import os
 from serial.tools import list_ports
 
-# for port num search
-# set device keyword
 
+
+# for ubuntu
+import subprocess
+device_name = '/dev/ttyUSB0'
+# permission change 
+subprocess.run('sudo chmod o+wr ' + device_name,shell=True)
+
+# port num search　for windows
+# set device keyword
 def comport_search(device_name_keyword = "MOXA"):
     # return port num
     ports = list_ports.comports()
@@ -20,7 +27,7 @@ def comport_search(device_name_keyword = "MOXA"):
         exit()
 
 
-comport = serial.Serial("/dev/ttyUSB0",baudrate=230400,parity=serial.PARITY_NONE)
+comport = serial.Serial(device_name,baudrate=230400,parity=serial.PARITY_NONE)
 #comport = serial.Serial(comport_search(),baudrate=230400,parity=serial.PARITY_NONE)
 
 all_time = 0
