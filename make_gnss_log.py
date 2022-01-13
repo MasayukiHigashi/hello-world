@@ -48,7 +48,7 @@ with open(log_path , 'w', newline="") as f:
 
 
 # for i in range(recording_time*gnss_hertz):
-while(true):
+while True:
     #tmp_time = time.time()
     #recv_data = comport.read(100).decode()
     recv_data = comport.readline().decode()
