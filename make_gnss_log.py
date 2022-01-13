@@ -39,7 +39,7 @@ def create_log_file(log_save_dir = 'gnss_log'):
     os.makedirs(log_save_dir, exist_ok=True)
     log_name = 'GNSS_log_'+ start_time_str+'.csv'
     log_path = log_save_dir + os.sep + log_name
-    log_header = ['UNIX_Time','UTC', 'latitude', 'North-south', 'longitude', 'East-west']
+    log_header = ['UNIX_Time','UTC_Date','UTC_Time', 'Latitude', 'North-South', 'Longitude', 'East-West']
     # make log file
     with open(log_path , 'w', newline="") as f:
         writer = csv.writer(f)
@@ -57,7 +57,7 @@ def log_gnss(comport,log_path,print_flag = True):
             #recv_data = '$GPRMC,083912.30,A,3538.53636147,N,13944.52325433,E,0.020,0.00,070122,,,A*6E'
             recv_list = recv_data.rsplit(',')
             # for GPRMC
-            log_data_list = [time.time(),recv_list[1],recv_list[3],recv_list[4],recv_list[5],recv_list[6]]
+            log_data_list = [time.time(),recv_list[9],recv_list[1],recv_list[3],recv_list[4],recv_list[5],recv_list[6]]
             with open(log_path , 'a', newline="") as f:
                 writer = csv.writer(f)
                 writer.writerow(log_data_list)
