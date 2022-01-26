@@ -1,0 +1,77 @@
+Before you're right, your first A.
+ Let's try to understand what is the or us?A.
+ A.
+.
+According to Ross, Wiki is basically a process that performs computation.
+You can just see a node as an executable program running inside your robot application.
+Your application will contain many nodes, which will be put into packages.
+Nodes will then communicate with each other.
+But let's just see.
+We've a real life example.
+I will show you a simplified example so you can easily understand what is the node and why is it useful?Let's go back to the previous slide where I explained to you what we are packages.
+So a package is an independent unit inside your application.
+Now, a package which is empty will not do anything.
+So we will create nodes inside the packages.
+We start with the Canara Bank.
+This package will handle a camera as an independent unit.
+So what should we put inside?First, we need a driver for the camera to be able to program it and get frames from it.
+We also need a program that will take those frames and do some image processing walk.
+We could also add any of the program related to the camera.
+We are using all those programs in blue nodes.
+Each node is launched separately.
+So first you will launch the driver and then the image processing node will be launched.
+Now, the nodes will communicate using cross communication functionalities, which we will see laterin this course.
+All right.
+We have our camera package filled with all the nodes we need noted that sometimes it can be quite hardto know if you shoot but two nodes in the same package.
+For example, the image processing node could be part of another package, which only handles imageprocessing for any camera.
+We could add many other processing nodes, and this package would communicate with any other camerapackage, which include drivers.
+But for this example, let's just say that the image processing is specific to this camera.
+We are talking about and both driver and image processing are using some common dependencies.
+We have another two packages in our application.
+Let's check the motion planning package.
+So in this package, you can expect to have a motion planning node, which will come compute motionplanning for any given robot.
+We can also add a bass correction node, which role is to modify the motion planning due to externalfactors.
+So great.
+We have two packages filled with nodes.
+What we can do now is to make two nodes inside different packages communicate together within the imageprocessing node to the path correction node.
+The image processing node will analyze frames coming from the camera, and we'll send an analysis ofthe Underland to the bus correction node.
+This node will then be able to notify the motion planning node, and we finish with also package, whichis the hardware control.
+This package, as an independent unit, will control the hardware of the robot that can be wheels,the robotic arm joints or anything else in this package.
+We'll find some drivers to control the motor.
+The drivers are controlled from the main control loop nodes.
+And finally, let's say that the position that that which is coming back from the modern cross is sentback to the control loop for precise control and is also published by state publisher Node.
+We have three nodes in this package.
+And now the motion planning node from the motion planning package will send computed trajectories tothe main control loop node inside the hardware control package to complete the architecture.
+The hardware state of the robot is published, and both the motion planning and bus correction nodesare listening to this message.
+Well, that is maybe quite complicated for now to get everything right now, but I think you have abetter idea of what is a node and why it is used for.
+Feel free to come back to this lecture.
+After you make some progress on this course, you will understand more things.
+So you've seen nodes weave a real life example.
+Now, let's go back to the node definition.
+A node is a process that performs computation, basically a program of your application, which is responsiblefor one single node combined into a graph and communicate with each other using or topics.
+Services and parameters, etc.
+ We will cover the communication tools in the next sections.
+So what are the characteristics and benefits of nodes?First of all, they reduce code complexity.
+If you currently separate your application into packages and nodes, then it will be much easier foryou to scale your application.
+Trust me on that.
+If you're right, everything in one block.
+Then after some time, you would spend more time fixing your code than actually developing new functionalities.
+Node also provide a great photo runs as nodes only communicate through ROS.
+They are not directly linked.
+If one node crashes, it will not make the other nodes crash so fast.
+That's great for debugging and signalling.
+That's great if you have, let's say, a critical node running your hardware that is well-tested andyou just added another new node in your program.
+Even if this latent node can crash, it will not affect the critical hardware node.
+Ross is language agnostic.
+It means that you can write one node in Python, another node in C++, and both can communicate withoutany problem.
+Python and C++ are the two most common languages for us through some libraries.
+You can use other languages to create new nodes.
+This characteristic is really great.
+For example, you can choose to develop your application in Python.
+While some nodes will be written in C++ because they need fast execution.
+Note that two nodes can't have the same name.
+If you want to run multiple instances of the same node, you'll have to add a prefix all suffix to thename.
+For example, in the following, we would see how to actually create nodes in both Python and C++.
+How to use them.
+We've come online tools and then how to make them communicate between each other.
+
